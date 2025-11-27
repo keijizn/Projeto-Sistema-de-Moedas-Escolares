@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empresa • Moeda Estudantil</title>
+  <link rel="stylesheet" href="css/empresa.css" />
+</head>
+<body>
+  <header>
+    <h1>Empresa Parceira</h1>
+    <button id="sair" type="button">Sair</button>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Cadastrar novo benefício</h2>
+
+      <div class="field">
+        <label for="titulo">Título</label>
+        <input id="titulo" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="descricao">Descrição</label>
+        <input id="descricao" type="text" />
+      </div>
+
+      <div class="field">
+        <label for="custo">Custo (moedas)</label>
+        <input id="custo" type="number" min="1" step="1" />
+      </div>
+
+      <!-- NOVO: upload de foto do benefício -->
+      <div class="field">
+        <label for="foto">Foto do benefício (opcional)</label>
+        <input id="foto" type="file" accept="image/*" />
+      </div>
+
+      <button id="criar" type="button">Criar benefício</button>
+    </section>
+
+    <section class="card">
+      <h2>Seus benefícios</h2>
+      <ul id="lista-beneficios"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Distribuir Moedas (para Professor)</h2>
+
+      <div class="field">
+        <label for="professorId">ID do Professor</label>
+        <input id="professorId" type="number" min="1" step="1" />
+      </div>
+
+      <div class="field">
+        <label for="quantidade">Quantidade</label>
+        <input id="quantidade" type="number" min="1" step="1" />
+      </div>
+
+      <div class="field">
+        <label for="motivo">Motivo</label>
+        <input id="motivo" type="text" />
+      </div>
+
+      <button id="enviar" type="button">Enviar moedas</button>
+    </section>
+
+    <section class="card">
+      <h2>Saldo</h2>
+      <div id="saldo" class="saldo">—</div>
+
+      <h3>Histórico</h3>
+      <ul id="hist"></ul>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/empresa.js"></script>
+</body>
+</html>
