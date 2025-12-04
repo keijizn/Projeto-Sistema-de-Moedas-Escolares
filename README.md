@@ -128,6 +128,7 @@ cd Moedas-Escolares
 
 ### ▶️ Executar o Backend (Spring Boot)
 cd backend
+
 mvn spring-boot:run
 
 ### 📁 Estrutura de Pastas
