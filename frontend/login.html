@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login • Moeda Estudantil</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Entrar</h1>
+    <div class="field">
+      <label for="role">Entrar como</label>
+      <select id="role">
+        <option value="ALUNO">Aluno</option>
+        <option value="PROFESSOR">Professor</option>
+        <option value="EMPRESA">Empresa parceira</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" placeholder="email@exemplo.com"/>
+    </div>
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" placeholder="••••••••"/>
+    </div>
+    <button id="btnLogin">Entrar</button>
+    <div class="register-links">
+      <span>Não tem conta?</span>
+      <a href="register-aluno.html">Cadastre-se (Aluno)</a> •
+      <a href="register-professor.html">Professor</a> •
+      <a href="register-empresa.html">Empresa</a>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

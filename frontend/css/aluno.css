@@ -1,0 +1,385 @@
+@import url('login.css');
+
+html, body{
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+/* utilitário genérico */
+.hidden{
+  display: none !important;
+}
+
+/* ===== HEADER ===== */
+
+header{
+  position: static;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  /* mesma largura dos cards */
+  width: min(1100px, 96vw);
+  margin: 20px auto 0;
+  padding: 14px 24px;
+
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  border: 1px solid rgba(139, 92, 246, .18);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 30px -20px rgba(0,0,0,.45);
+}
+
+header h1{
+  margin: 0;
+  font-size: 24px;         
+  letter-spacing: .2px;
+  white-space: nowrap;      
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* container dos botões do header */
+.header-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* estilo base dos dois botões do header */
+.header-actions button{
+  height: 32px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, .35);
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -10px rgba(139, 92, 246, .6);
+  transition: transform .06s ease, filter .15s ease, background .2s ease;
+}
+
+.header-actions button:hover{
+  background: rgba(139, 92, 246, .08);
+}
+
+.header-actions button:active{
+  transform: translateY(1px);
+}
+
+/* botão Histórico (secundário) */
+#btn-hist{
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 6px 14px -10px rgba(15, 23, 42, 0.8);
+}
+
+/* botão Sair (principal) */
+#sair{
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  color: #fff;
+  border-color: transparent;
+}
+
+#sair:hover{
+  filter: brightness(1.05);
+}
+
+/* ======== Conteúdo principal ======== */
+
+.grid{
+  width: min(1100px, 100%);
+  margin: 16px auto 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.grid .card{
+  width: auto;
+  max-width: none;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  border: 1px solid rgba(139, 92, 246, .18);
+  border-radius: 16px;
+  padding: 18px 16px 16px;
+  box-shadow:
+    0 18px 36px -20px rgba(0,0,0,.55),
+    0 0 0 1px rgba(139, 92, 246, .12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card h2{
+  margin: 0 0 12px;
+  font-size: 18px;
+  letter-spacing: .2px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0;
+}
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field input{
+  height: 48px;
+}
+
+.actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.actions button{
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: 0;
+}
+
+button.danger{
+  background: #ef4444;
+  color: #fff;
+  box-shadow: 0 10px 18px -12px rgba(239, 68, 68, .7);
+}
+button.danger:hover{ filter: brightness(1.05); }
+
+.saldo{
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #a78bfa, #8b5cf6 40%, #6d28d9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* listas padrão de card (usadas no histórico dentro do modal) */
+.card ul{
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card ul li{
+  border: 1px dashed rgba(139, 92, 246, .25);
+  border-radius: 14px;
+  padding: 10px 12px;
+  color: color-mix(in srgb, var(--text) 84%, white 6%);
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ===== Catálogo ===== */
+
+.benefits-section{
+  margin-top: 0.5rem;
+  grid-column: 1 / -1; /* ocupa as duas colunas da grid */
+}
+
+/* Grid de catálogo */
+.benefits-grid{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Cada card */
+.benefit-card{
+  background: #18152b;
+  border-radius: 16px;
+  padding: 1.2rem;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Área da imagem */
+.benefit-thumb{
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, #4c35ff33, #0b0817);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto do card */
+.benefit-title{
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.benefit-description{
+  font-size: 0.85rem;
+  color: #b7b3d9;
+  min-height: 2.4em;
+}
+
+.benefit-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+/* Badge de custo */
+.benefit-cost-badge{
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(132, 94, 255, 0.18);
+  color: #e0d5ff;
+  border: 1px solid rgba(132, 94, 255, 0.6);
+}
+
+/* Botão “Resgatar” */
+.benefit-redeem-btn{
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(90deg, #8b5dff, #bf5af2);
+  color: #fff;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.benefit-redeem-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(191, 90, 242, 0.4);
+  opacity: 0.95;
+}
+
+/* ===== Seção de QR Code ===== */
+
+.qr-section{
+  width: min(1100px, 96vw);
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.qr-info{
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.qr-code-box{
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Modal do Histórico ===== */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal.hidden{
+  display: none;
+}
+
+.modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content{
+  position: relative;
+  width: min(700px, 90vw);
+  max-height: min(520px, 80vh);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.icon-btn{
+  border: 0;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+
+.hist-list{
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* ===== Responsivo ===== */
+
+@media (max-width: 900px){
+  .grid{ grid-template-columns: 1fr; }
+
+  header{
+    width: min(100%, 96vw);
+  }
+}
+
+@media (max-width: 520px){
+  header{
+    padding: 12px 14px;
+  }
+  header h1{
+    font-size: 20px;
+    white-space: normal;
+  }
+}
