@@ -1,34 +1,154 @@
-# Sistema-de-Moedas
+# 💰 Moedas Escolares – Sistema de Moeda Estudantil
 
-## Diagrama de Classes:
-<img width="717" height="635" alt="image" src="https://github.com/user-attachments/assets/48cced77-b165-41d7-bae9-40ff5fbbc50b" />
+O **Sistema de Moeda Estudantil – Moedas Escolares** foi criado para valorizar o desempenho dos estudantes, tornando o reconhecimento do mérito algo visível, moderno e recompensador.
 
-## Diagrama de Componentes:
-<img width="1150" height="661" alt="image" src="https://github.com/user-attachments/assets/e1ed9630-6cfc-4fad-a454-688171dc0f74" />
+Professores distribuem moedas virtuais como incentivo, e alunos podem trocá-las por benefícios oferecidos pelas empresas parceiras.
 
+Principais objetivos do sistema:
 
-## Histórias de Usuário:
-- Como aluno, quero me cadastrar informando nome, e-mail, CPF, RG, endereço, instituição e curso para participar do sistema.
--	Como usuário (aluno/professor/empresa), quero fazer login com e-mail e senha para acessar minhas funcionalidades.
--	Como aluno, quero ver meu extrato para entender recebimentos e trocas.
--	Como aluno, quero ver meu saldo para saber quantas moedas posso trocar.
--	Como professor, quero ver meu extrato para acompanhar envios de moedas.
--	Como professor, quero ver meu saldo para planejar distribuições.
--	Como professor, quero enviar moedas a um aluno informando uma mensagem obrigatória para reconhecer mérito.
--	Como aluno, quero ser notificado por e-mail ao receber moedas para acompanhar reconhecimentos.
--	Como empresa parceira, quero cadastrar uma vantagem com descrição, foto e custo (em moedas) para disponibilizá-la aos alunos.
--	Como aluno, quero resgatar uma vantagem para obter benefício/desconto.
--	Como empresa/aluno, quero receber um cupom com código único para conferência no momento do uso presencial.
--	Como professor, quero receber automaticamente 1000 moedas a cada semestre para continuar premiando alunos.
--	Como aluno, quero listar e filtrar vantagens para escolher onde gastar minhas moedas.
--	Como empresa, quero enviar a foto do produto/serviço para ilustrar a vantagem.
+- Motivação dos alunos por recompensas reais  
+- Transparência no acompanhamento de méritos  
+- Conexão inovadora entre escolas, professores, empresas e estudantes  
+- Organização e automação de processos educacionais  
 
-## Diagrama de Casos de Uso:
-<img width="720" height="465" alt="image" src="https://github.com/user-attachments/assets/72bd302d-18b7-48ae-935b-d8183d82ceb9" />
+---
 
-## Modelo ER do Banco de Dados:
-<img width="772" height="720" alt="ER do Sistema de Moedas drawio" src="https://github.com/user-attachments/assets/41950aa0-2b7c-4d84-92b5-70b5bf59b36e" />
+## 🎯 Funcionalidades Principais
 
+### 👨‍🎓 Cadastro de Alunos
+Alunos registram nome, CPF, email e curso para participarem do programa.
 
+### 👩‍🏫 Cadastro de Professores
+Professores são responsáveis por distribuir moedas e acompanhar o histórico dos alunos.
 
+### 🏢 Cadastro de Empresas Parceiras
+Empresas podem criar benefícios como produtos, serviços, cupons e descontos.
 
+### 💸 Distribuição de Moedas
+Professores recebem um saldo de moedas para distribuir de acordo com o desempenho dos estudantes.
+
+### ✉️ Notificações Automáticas por E-mail
+Integração com **EmailJS** e **JavaMailSender** para envio de:
+
+- Notificações de recebimento de moedas  
+- Confirmação de resgate de benefícios  
+- E-mails de redefinição de senha  
+
+### 🎁 Resgate de Benefícios
+Alunos podem trocar moedas acumuladas por vantagens.  
+Ao resgatar, recebem um **código de uso por e-mail**.
+
+### 🔐 Autenticação e Perfis
+
+Perfis disponíveis:
+
+- Aluno  
+- Professor  
+- Empresa Parceira  
+
+Recursos de segurança:
+
+- Login por e-mail e senha  
+- Recuperação de senha via e-mail  
+- Geração de nova senha automática  
+- Integração com **Spring Security**  
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+### 🔧 Backend – Spring Boot
+
+- Java 17+  
+- Spring Boot 3.3.4  
+- Spring Data JPA  
+- Spring Security  
+- PostgreSQL  
+- Maven  
+- JavaMailSender  
+- EmailJS (integração via API)  
+
+### 🌐 Frontend – HTML/CSS/JS
+
+- HTML5  
+- CSS3 (layout com glassmorphism em azul-turquesa)  
+- JavaScript (vanilla)  
+- Consumo de API REST via `fetch`  
+
+---
+
+## 🏛️ Arquitetura do Sistema
+
+O backend segue boas práticas de arquitetura em camadas:
+
+**Controller → Service → Repository → Domain (Model) → DTO**
+
+### Camadas
+
+- **api (Controller)**  
+  Endpoints REST para autenticação, cadastro, distribuição de moedas, resgates, etc.
+
+- **service**  
+  Contém as regras de negócio (envio de e-mails, reset de senha, cálculos de moedas, validações).
+
+- **repo**  
+  Interfaces `Repository` usando Spring Data JPA para acesso ao banco de dados.
+
+- **domain (model)**  
+  Entidades principais do sistema, como:
+  - Aluno  
+  - Professor  
+  - Empresa Parceira  
+  - Benefício  
+  - Menu  
+  - Evento / Transações de moedas  
+
+- **dto**  
+  Objetos de transferência de dados para entrada/saída da API.
+
+- **security**  
+  Configurações de autenticação e autorização (Spring Security).
+
+---
+
+## ⚙️ Instalação e Execução
+
+### ✔️ Pré-requisitos
+
+- Java 17 ou superior  
+- Maven 3.8+  
+- PostgreSQL configurado (banco `moeda`)  
+- Git instalado  
+- Navegador moderno  
+
+### 📥 Clonar o Repositório
+
+git clone https://github.com/keijizn/Moedas-Escolares.git
+cd Moedas-Escolares
+
+### ▶️ Executar o Backend (Spring Boot)
+cd backend
+mvn spring-boot:run
+
+### 📁 Estrutura de Pastas
+Moedas-Escolares/
+│
+├── backend/
+│   ├── src/main/java/com/example/moeda/moedaestudantil/
+│   │   ├── api/         # Controllers (Auth, Aluno, Professor, Empresa, etc.)
+│   │   ├── service/     # Regras de negócio, envio de e-mails, reset de senha
+│   │   ├── repo/        # Repositórios JPA
+│   │   ├── domain/      # Entidades do sistema
+│   │   ├── security/    # Configurações de segurança
+│   │   └── dto/         # Data Transfer Objects
+│   ├── src/main/resources/
+│   │   └── application.properties
+│   └── pom.xml
+│
+├── frontend/
+│   ├── assets/
+│   ├── css/
+│   ├── js/
+│   └── *.html           # Telas de login, aluno, professor, empresa, etc.
+│
+└── README.md
