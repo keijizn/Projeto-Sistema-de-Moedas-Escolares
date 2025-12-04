@@ -131,6 +131,7 @@ cd backend
 mvn spring-boot:run
 
 ### 📁 Estrutura de Pastas
+
 Moedas-Escolares/
 │
 ├── backend/
