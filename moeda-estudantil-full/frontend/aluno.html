@@ -1,34 +1,107 @@
 <!doctype html>
-<html lang="pt-br"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aluno • Moeda Estudantil</title>
-<link rel="stylesheet" href="css/aluno.css">
-</head><body>
-<header><h1>Área do Aluno</h1><button id="sair">Sair</button></header>
-<main class="grid">
-  <section class="card">
-    <h2>Informações de Cadastro</h2>
-    <div class="field"><label>Nome</label><input id="nome"></div>
-    <div class="field"><label>Curso</label><input id="curso"></div>
-    <div class="field"><label>E-mail</label><input id="email"></div>
-    <div class="actions">
-      <button id="salvar">Salvar</button>
-      <button id="excluir" class="danger">Excluir conta</button>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aluno • Moeda Estudantil</title>
+  <link rel="stylesheet" href="css/aluno.css">
+
+  <!-- EmailJS SDK -->
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      // inicializa EmailJS com a sua PUBLIC KEY
+      emailjs.init({
+        publicKey: 'dPjh-5EqqslwaOGXP'
+      });
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Área do Aluno</h1>
+
+    <div class="header-actions">
+      <button id="btn-hist">Histórico</button>
+      <button id="sair">Sair</button>
     </div>
+  </header>
+
+  <!-- QR CODE FIXO AO LADO (desktop) -->
+  <section id="qr-section" class="card qr-section hidden">
+    <h2>QR Code do Resgate</h2>
+    <p id="qr-info" class="qr-info">
+      Após resgatar um benefício, o QR Code aparecerá aqui.
+    </p>
+    <div id="qrcode" class="qr-code-box"></div>
+
+    <!-- mensagem extra abaixo do QR (mesmo texto do popup) -->
+    <p id="qr-extra-msg" class="qr-extra-msg"></p>
   </section>
-  <section class="card">
-    <h2>Saldo de Moedas</h2>
-    <div id="saldo" class="saldo">—</div>
-  </section>
-  <section class="card">
-    <h2>Histórico</h2>
-    <ul id="hist"></ul>
-  </section>
-  <section class="card">
-    <h2>Benefícios Ativos</h2>
-    <ul id="beneficios"></ul>
-  </section>
-</main>
-<script src="js/config.js"></script>
-<script src="js/aluno.js"></script>
-</body></html>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Informações de Cadastro</h2>
+      <div class="field">
+        <label>Nome</label>
+        <input id="nome">
+      </div>
+      <div class="field">
+        <label>Curso</label>
+        <input id="curso">
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input id="email">
+      </div>
+      <div class="actions">
+        <button id="salvar">Salvar</button>
+        <button id="excluir" class="danger">Excluir conta</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Saldo de Moedas</h2>
+      <div id="saldo" class="saldo">—</div>
+    </section>
+
+    <!-- Catálogo ocupando toda a largura -->
+    <section class="card benefits-section">
+      <h2>Benefícios Ativos</h2>
+      <ul id="beneficios" class="benefits-grid">
+        <!-- os cards são inseridos via JS -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- Modal de Histórico -->
+  <div id="historicoModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2>Histórico de Movimentações</h2>
+        <button id="fecharHistorico" class="icon-btn" aria-label="Fechar">×</button>
+      </header>
+      <ul id="hist" class="hist-list"></ul>
+    </div>
+  </div>
+
+  <!-- POPUP PERSONALIZADO DE RESGATE -->
+  <div id="popup-resgate" class="resgate-popup hidden">
+    <div class="resgate-popup-content">
+      <h3 id="popup-title">Resgate realizado!</h3>
+      <p id="popup-body"></p>
+      <button id="popup-ok" class="popup-btn">OK</button>
+    </div>
+  </div>
+
+  <!-- Biblioteca para gerar QR Code (sem integrity pra não ser bloqueado) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script src="js/config.js"></script>
+  <script src="js/aluno.js"></script>
+</body>
+</html>

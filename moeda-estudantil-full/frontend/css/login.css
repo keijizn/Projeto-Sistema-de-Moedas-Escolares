@@ -1,11 +1,380 @@
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial;background:#f7f7fb;color:#222}
-.card{max-width:420px;margin:6vh auto;background:#fff;border:1px solid #eee;border-radius:16px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
-h1{margin:0 0 16px;font-size:24px}
-.field{display:flex;flex-direction:column;margin:10px 0}
-label{font-size:13px;color:#555;margin-bottom:6px}
-input,select{padding:12px;border-radius:10px;border:1px solid #d9d9e3;background:#fafafa}
-button{width:100%;margin-top:14px;padding:12px 16px;border:0;border-radius:12px;background:#3b82f6;color:#fff;font-weight:600;cursor:pointer}
-button:hover{opacity:.95}
-.register-links{margin-top:12px;font-size:14px}
-.register-links a{color:#3b82f6;text-decoration:none}
-.register-links a:hover{text-decoration:underline}
+*{ box-sizing: border-box; }
+
+:root{
+  --bg: #11111B;           
+  --card: #11111B;         
+  --text: #8b5cf6;         
+  --muted: #6b6b6b;      
+  --input-bg: #ffffff;   
+  --input-border: #e5e5e5;
+  --focus: #8b5cf6;       
+  --btn: #8b5cf6;          
+  --btn-text: #fff;
+  --radius-pill: 9999px;
+  --font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+html, body{
+  margin: 0;
+  font-family: var(--font);
+  color: var(--text);
+
+  /* Fundo com imagem */
+  background-image: url("../img/unnamed.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card{
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 12px 24px #8b5cf6;
+}
+
+h1{
+  margin: 0 0 18px;
+  font-size: 28px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+label{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+input, select{
+  width: 100%;
+  height: 52px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  outline: none;
+  transition: box-shadow .2s, border-color .2s, background .2s;
+  appearance: none;
+}
+
+input::placeholder{
+  color: #8f8f8f;
+}
+
+select{
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9a9a9a 50%),
+    linear-gradient(135deg, #9a9a9a 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 22px) 50%,
+    calc(100% - 16px) 50%,
+    0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+}
+
+input:focus, select:focus{
+  border-color: color-mix(in srgb, var(--focus) 70%, white 30%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--focus) 22%, transparent);
+}
+
+button{
+  width: 100%;
+  height: 54px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--btn);
+  color: var(--btn-text);
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease, box-shadow .2s ease;
+  box-shadow: 0 12px 20px -12px rgba(0,0,0,.35);
+}
+
+button:hover{
+  filter: brightness(1.06);
+}
+
+button:active{
+  transform: translateY(1px);
+}
+
+button:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--focus) 35%, transparent);
+  outline-offset: 2px;
+}
+
+button.is-loading{
+  opacity:.9;
+  pointer-events:none;
+}
+
+.register-links{
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.register-links a{
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.register-links a:hover{
+  text-decoration: underline;
+}
+
+@media (max-width: 480px){
+  .card{
+    padding: 22px 18px;
+  }
+}
+
+:root, html, body, select, input, button { 
+  color-scheme: light; 
+}
+
+select, option, optgroup{
+  background: #fff; 
+  color: #111;
+}
+
+/* LOGO */
+.brand{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.brand-logo{
+  width: 250px;
+  height: auto;
+}
+
+/* 🔹 LINK "ESQUECI MINHA SENHA" */
+.forgot-password{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.link-button{
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 4px 8px;
+}
+
+.link-button:hover{
+  opacity: 0.85;
+}
+
+/* 🔹 MODAL DE REDEFINIÇÃO */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none;             /* escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.is-open{
+  display: flex;
+}
+
+.modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: #11111b;
+  border-radius: 20px;
+  padding: 24px 20px 20px;
+  box-shadow: 0 18px 32px rgba(0,0,0,0.6);
+}
+
+.modal-content h2{
+  margin: 0 0 8px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modal-text{
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.modal-actions{
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn-secondary{
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  height: 40px;
+  border-radius: 999px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary{
+  background: var(--btn);
+  color: var(--btn-text);
+  border: none;
+  height: 40px;
+  border-radius: 999px;
+  padding: 0 18px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ============================
+   TOASTS – NOTIFICAÇÕES NOVAS
+   ============================ */
+
+.me-toast-container{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 3000;
+}
+
+.me-toast{
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: #111;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+
+  /* 🔹 garante um espaço bom pro texto */
+  width: 420px;
+  max-width: 420px;
+  min-width: 360px;
+
+  border-left: 5px solid #8b5cf6; 
+  animation: me-toast-in 0.25s ease-out;
+}
+
+
+.me-toast--success{ border-left-color: #8b5cf6; }
+.me-toast--error{ border-left-color: #ef4444; }
+.me-toast--warning{ border-left-color: #eab308; }
+
+.me-toast-icon{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-top: 2px;
+  color: #fff;
+  background: #9f22c5;
+}
+
+.me-toast--error .me-toast-icon{ background: #ef4444; }
+.me-toast--warning .me-toast-icon{ background: #eab308; }
+
+.me-toast-content{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.me-toast-title{
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.me-toast-message{
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.45;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.me-toast-close{
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  font-size: 18px;
+  color: #9ca3af;
+  margin-left: 6px;
+  padding: 0;
+
+  /* 🔹 Sobrescreve o estilo global de button */
+  width: auto !important;
+  height: auto !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.me-toast-close:hover{
+  color: #6b7280;
+}
+
+
+.me-toast-close:hover{
+  color: #6b7280;
+}
+
+.me-toast.hide{
+  animation: me-toast-out 0.2s ease-in forwards;
+}
+
+@keyframes me-toast-in{
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes me-toast-out{
+  to { opacity: 0; transform: translateX(14px); }
+}

@@ -1,9 +1,527 @@
 @import url('login.css');
-header{display:flex;justify-content:space-between;align-items:center;max-width:1024px;margin:20px auto 0}
-header h1{margin:0}
-header button{padding:8px 12px;border-radius:10px;border:1px solid #ddd;background:#fff;cursor:pointer}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1024px;margin:16px auto}
-.card ul{margin:0;padding-left:18px}
-.saldo{font-size:28px;font-weight:700}
-.danger{background:#ef4444;color:#fff}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+html, body{
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+/* utilitário genérico */
+.hidden{
+  display: none !important;
+}
+
+/* ===== HEADER ===== */
+
+header{
+  position: static;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  /* mesma largura dos cards */
+  width: min(1100px, 96vw);
+  margin: 20px auto 0;
+  padding: 14px 24px;
+
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  border: 1px solid rgba(139, 92, 246, .18);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 16px 30px -20px rgba(0,0,0,.45);
+}
+
+header h1{
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: .2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* container dos botões do header */
+.header-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* estilo base dos dois botões do header */
+.header-actions button{
+  height: 32px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 92, 246, .35);
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -10px rgba(139, 92, 246, .6);
+  transition: transform .06s ease, filter .15s ease, background .2s ease;
+}
+
+.header-actions button:hover{
+  background: rgba(139, 92, 246, .08);
+}
+
+.header-actions button:active{
+  transform: translateY(1px);
+}
+
+/* botão Histórico (secundário) */
+#btn-hist{
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 6px 14px -10px rgba(15, 23, 42, 0.8);
+}
+
+/* botão Sair (principal) */
+#sair{
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  color: #fff;
+  border-color: transparent;
+}
+
+#sair:hover{
+  filter: brightness(1.05);
+}
+
+/* ======== Conteúdo principal ======== */
+
+.grid{
+  width: min(1100px, 100%);
+  margin: 16px auto 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.grid .card{
+  width: auto;
+  max-width: none;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  border: 1px solid rgba(139, 92, 246, .18);
+  border-radius: 16px;
+  padding: 18px 16px 16px;
+  box-shadow:
+    0 18px 36px -20px rgba(0,0,0,.55),
+    0 0 0 1px rgba(139, 92, 246, .12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card h2{
+  margin: 0 0 12px;
+  font-size: 18px;
+  letter-spacing: .2px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0;
+}
+.field label{
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.field input{
+  height: 48px;
+}
+
+.actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.actions button{
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: 0;
+}
+
+button.danger{
+  background: #ef4444;
+  color: #fff;
+  box-shadow: 0 10px 18px -12px rgba(239, 68, 68, .7);
+}
+button.danger:hover{ filter: brightness(1.05); }
+
+.saldo{
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #a78bfa, #8b5cf6 40%, #6d28d9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== listas do HISTÓRICO ===== */
+
+.hist-list{
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+  max-height: 260px;
+}
+
+.hist-list li{
+  border: 1px dashed rgba(139, 92, 246, .25);
+  border-radius: 14px;
+  padding: 10px 12px;
+  color: color-mix(in srgb, var(--text) 84%, white 6%);
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+/* ===== Catálogo ===== */
+
+.benefits-section{
+  margin-top: 0.5rem;
+  grid-column: 1 / -1; /* ocupa as duas colunas da grid */
+}
+
+/* Grid de catálogo em carrossel horizontal */
+.benefits-grid{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;                /* linha */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  overflow-x: auto;             /* scroll horizontal */
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+}
+
+.benefits-grid::-webkit-scrollbar{
+  height: 6px;
+}
+.benefits-grid::-webkit-scrollbar-track{
+  background: #020617;
+}
+.benefits-grid::-webkit-scrollbar-thumb{
+  background: #4c1d95;
+  border-radius: 999px;
+}
+
+/* Cada card */
+.benefit-card{
+  min-width: 240px;
+  max-width: 260px;
+  flex: 0 0 auto;               /* não quebra linha */
+  scroll-snap-align: start;
+
+  background: #18152b;
+  border-radius: 16px;
+  padding: 1.2rem;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Área da imagem */
+.benefit-thumb{
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, #4c35ff33, #0b0817);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto do card */
+.benefit-title{
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.benefit-description{
+  font-size: 0.85rem;
+  color: #b7b3d9;
+  min-height: 2.4em;
+}
+
+.benefit-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+/* Badge de custo */
+.benefit-cost-badge{
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(132, 94, 255, 0.18);
+  color: #e0d5ff;
+  border: 1px solid rgba(132, 94, 255, 0.6);
+}
+
+/* Botão “Resgatar” */
+.benefit-redeem-btn{
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(90deg, #8b5dff, #bf5af2);
+  color: #fff;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.benefit-redeem-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(191, 90, 242, 0.4);
+  opacity: 0.95;
+}
+
+/* ===== Seção de QR Code (fixa à direita em desktop) ===== */
+
+.qr-section{
+  position: fixed;
+  top: 120px;      /* ajusta pra alinhar com o topo dos cards */
+  right: 40px;     /* distância da borda direita */
+  width: 260px;
+  text-align: center;
+  z-index: 30;
+
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  border: 1px solid rgba(139, 92, 246, .18);
+  border-radius: 16px;
+  padding: 18px 16px 20px;
+  box-shadow:
+    0 18px 36px -20px rgba(0,0,0,.65),
+    0 0 0 1px rgba(139, 92, 246, .25);
+}
+
+.qr-section h2{
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.qr-info{
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.qr-code-box{
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* mensagem extra abaixo do QR */
+.qr-extra-msg{
+  margin-top: 10px;
+  font-size: 0.84rem;
+  color: #e0d5ff;
+  line-height: 1.5;
+}
+
+/* ===== POPUP DE RESGATE ===== */
+
+.resgate-popup{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.resgate-popup.hidden{
+  display: none;
+}
+
+.resgate-popup-content{
+  width: min(360px, 90vw);
+  padding: 20px 22px 18px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--card) 90%, #020617 10%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow:
+    0 25px 50px -25px rgba(0,0,0,.8),
+    0 0 0 1px rgba(15, 23, 42, 0.7);
+}
+
+.resgate-popup-content h3{
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+.resgate-popup-content p{
+  margin: 0 0 16px;
+  font-size: 0.92rem;
+  color: #e5e7eb;
+  line-height: 1.5;
+}
+
+.popup-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+  color: white;
+  box-shadow: 0 12px 25px -14px rgba(139, 92, 246, .9);
+}
+
+.popup-btn:hover{
+  filter: brightness(1.05);
+}
+
+/* ===== MODAL DO HISTÓRICO (popup) ===== */
+
+.modal{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 70;
+}
+
+.modal.hidden{
+  display: none;
+}
+
+.modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content{
+  position: relative;
+  box-sizing: border-box;
+  width: min(520px, 90vw);
+  max-width: 520px;
+  max-height: min(420px, 80vh);
+  padding: 20px 22px;
+  border-radius: 18px;
+
+  background: color-mix(in srgb, var(--card) 90%, #020617 10%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow:
+    0 25px 50px -25px rgba(0,0,0,.8),
+    0 0 0 1px rgba(15, 23, 42, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  z-index: 71;
+  margin: 0 auto;
+}
+
+.modal-header{
+  /* zera o estilo do header global */
+  width: 100%;
+  padding: 0;
+  margin: 0 0 10px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  /* layout do título + botão X */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h2{
+  margin: 0;
+  font-size: 18px;
+  max-width: calc(100% - 40px); /* espaço pro X */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon-btn{
+  border: 0;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+
+/* ===== Responsivo ===== */
+
+@media (max-width: 1200px){
+  /* Em telas menores, o QR volta para o fluxo normal da página */
+  .qr-section{
+    position: static;
+    width: min(1100px, 96vw);
+    margin: 16px auto 32px;
+  }
+}
+
+@media (max-width: 900px){
+  .grid{ grid-template-columns: 1fr; }
+
+  header{
+    width: min(100%, 96vw);
+  }
+}
+
+@media (max-width: 520px){
+  header{
+    padding: 12px 14px;
+  }
+  header h1{
+    font-size: 20px;
+    white-space: normal;
+  }
+}

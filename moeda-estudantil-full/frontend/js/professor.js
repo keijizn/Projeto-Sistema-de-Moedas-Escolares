@@ -1,16 +1,11 @@
-// js/professor.js
-// Precisa de js/config.js: const API_BASE_URL = 'http://localhost:8080/api';
-
 const user = JSON.parse(localStorage.getItem('user') || 'null');
 if (!user || user.role !== 'PROFESSOR') {
   location.href = 'login.html';
 }
 const professorId = Number(user.id);
 
-// helper de DOM
 const $ = (id) => document.getElementById(id);
 
-// (opcional) fallback /professores -> /professor
 function toSingular(path) {
   return path.replace('/professores/', '/professor/');
 }
@@ -40,7 +35,6 @@ async function enviar() {
     const res = await apiFetch(`/professores/${professorId}/grant`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      // >>> os nomes que o backend espera <<<
       body: JSON.stringify({ alunoId, amount: quantidade, reason: motivo })
     });
 
@@ -52,9 +46,6 @@ async function enviar() {
     }
 
     alert('Moedas enviadas!');
-    // opcional: limpar campos
-    // $('quantidade').value = '';
-    // $('motivo').value = '';
     await loadSaldo();
     await loadHist();
   } catch (e) {
@@ -79,7 +70,6 @@ async function loadHist() {
 
   (Array.isArray(items) ? items : []).forEach(i => {
     const li = document.createElement('li');
-    // reason (não descricao)
     li.textContent = `${i.ts} • ${i.kind} • ${i.amount} • ${i.reason || ''}`;
     ul.appendChild(li);
   });

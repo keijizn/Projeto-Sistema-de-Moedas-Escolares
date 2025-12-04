@@ -7,8 +7,18 @@
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
+  <!-- CONTAINER DE NOTIFICAÇÕES (TOASTS) -->
+  <div id="toast-container" class="me-toast-container"></div>
+
+  <!-- LOGO -->
+  <div class="brand">
+    <img src="img/ChatGPT Image 27 de nov. de 2025, 12_51_19.png" class="brand-logo" alt="Moeda Estudantil">
+  </div>
+
   <main class="card">
     <h1>Entrar</h1>
+
     <div class="field">
       <label for="role">Entrar como</label>
       <select id="role">
@@ -17,15 +27,26 @@
         <option value="EMPRESA">Empresa parceira</option>
       </select>
     </div>
+
     <div class="field">
       <label for="email">E-mail</label>
       <input id="email" type="email" placeholder="email@exemplo.com"/>
     </div>
+
     <div class="field">
       <label for="senha">Senha</label>
       <input id="senha" type="password" placeholder="••••••••"/>
     </div>
+
     <button id="btnLogin">Entrar</button>
+
+    <!-- 🔹 LINK “Esqueci minha senha” -->
+    <div class="forgot-password">
+      <button type="button" id="btnEsqueciSenha" class="link-button">
+        Esqueci minha senha
+      </button>
+    </div>
+
     <div class="register-links">
       <span>Não tem conta?</span>
       <a href="register-aluno.html">Cadastre-se (Aluno)</a> •
@@ -33,6 +54,52 @@
       <a href="register-empresa.html">Empresa</a>
     </div>
   </main>
+
+  <!-- 🔹 MODAL DE REDEFINIÇÃO DE SENHA -->
+  <div class="modal" id="forgotModal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <h2>Redefinir senha</h2>
+
+      <p class="modal-text">
+        Informe seu e-mail cadastrado, o tipo de usuário e a nova senha.
+      </p>
+
+      <div class="field">
+        <label for="forgotRole">Tipo de usuário</label>
+        <select id="forgotRole">
+          <option value="ALUNO">Aluno</option>
+          <option value="PROFESSOR">Professor</option>
+          <option value="EMPRESA">Empresa parceira</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="forgotEmail">E-mail</label>
+        <input id="forgotEmail" type="email" placeholder="email@exemplo.com">
+      </div>
+
+      <div class="field">
+        <label for="newPassword">Nova senha</label>
+        <input id="newPassword" type="password" placeholder="Digite a nova senha">
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirmar nova senha</label>
+        <input id="confirmPassword" type="password" placeholder="Repita a nova senha">
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnCancelarReset" class="btn-secondary">
+          Cancelar
+        </button>
+        <button type="button" id="btnConfirmarReset" class="btn-primary">
+          Redefinir senha
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
   <script src="js/login.js"></script>
 </body>

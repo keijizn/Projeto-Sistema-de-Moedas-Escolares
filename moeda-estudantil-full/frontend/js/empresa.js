@@ -1,6 +1,3 @@
-// js/empresa.js
-// precisa de js/config.js com:  const API_BASE_URL = 'http://localhost:8080/api';
-
 const user = JSON.parse(localStorage.getItem('user') || 'null');
 if (!user || user.role !== 'EMPRESA') {
   location.href = 'login.html';
@@ -8,13 +5,12 @@ if (!user || user.role !== 'EMPRESA') {
 const empresaId = Number(user.id);
 console.log('[EMPRESA] API_BASE_URL:', API_BASE_URL, 'empresaId:', empresaId);
 
-// helpers DOM
 const $ = (id) => document.getElementById(id);
 
-// ------------------------ FETCH BASE ------------------------
 function toSingular(path) {
   return path.replace('/empresas/', '/empresa/');
 }
+
 async function apiFetch(path, options = {}) {
   const urlPlural = `${API_BASE_URL}${path}`;
   console.log('[fetch] →', urlPlural, options);
@@ -34,9 +30,8 @@ async function apiFetch(path, options = {}) {
   console.log('[fetch] ←', r.status, r.statusText);
   return r;
 }
-// ------------------------------------------------------------
 
-// ===== SALDO =====
+/* ========== SALDO ========== */
 async function carregarSaldo() {
   try {
     const r = await apiFetch(`/empresas/${empresaId}/wallet`);
@@ -50,7 +45,7 @@ async function carregarSaldo() {
   }
 }
 
-// ===== HISTÓRICO =====
+/* ========== HISTÓRICO ========== */
 async function carregarHistorico() {
   try {
     const r = await apiFetch(`/empresas/${empresaId}/ledger`);
@@ -73,7 +68,7 @@ async function carregarHistorico() {
   }
 }
 
-// ===== BENEFÍCIOS =====
+/* ========== LISTAR BENEFÍCIOS ========== */
 async function listarBeneficios() {
   try {
     const r = await apiFetch(`/empresas/${empresaId}/beneficios`);
@@ -92,7 +87,50 @@ async function listarBeneficios() {
 
     arr.forEach(b => {
       const li = document.createElement('li');
-      li.textContent = `${b.titulo} — ${b.descricao || ''} (custo: ${b.custo})`;
+
+      const card = document.createElement('article');
+      card.className = 'benefit-card';
+
+      const thumb = document.createElement('div');
+      thumb.className = 'benefit-thumb';
+
+      const img = document.createElement('img');
+      img.className = 'benefit-img';
+
+      const imgUrl = `${API_BASE_URL}/beneficios/${b.id}/image`;
+      console.log('[benefit img]', b.id, '→', imgUrl);
+      img.src = imgUrl;
+      img.alt = b.titulo || 'Imagem do benefício';
+
+      img.onerror = () => {
+        console.warn('[benefit img] erro ao carregar imagem do benefício', b.id);
+        // Se quiser esconder o quadradinho quando der erro:
+        // img.style.display = 'none';
+      };
+
+      thumb.appendChild(img);
+
+      const body = document.createElement('div');
+      body.className = 'benefit-body';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = b.titulo;
+
+      const p = document.createElement('p');
+      p.className = 'benefit-description';
+      p.textContent = b.descricao || 'Sem descrição.';
+
+      const span = document.createElement('span');
+      span.className = 'benefit-cost';
+      span.textContent = `${b.custo} moedas`;
+
+      body.appendChild(h3);
+      body.appendChild(p);
+      body.appendChild(span);
+
+      card.appendChild(thumb);
+      card.appendChild(body);
+      li.appendChild(card);
       list.appendChild(li);
     });
   } catch (e) {
@@ -101,23 +139,41 @@ async function listarBeneficios() {
   }
 }
 
-// ===== CRIAR BENEFÍCIO =====
+/* ========== CRIAR BENEFÍCIO ========== */
 async function criarBeneficio() {
   try {
     const titulo = $('titulo')?.value?.trim() || '';
     const descricao = $('descricao')?.value?.trim() || '';
     const custo = parseInt($('custo')?.value || '0', 10);
+    const fotoFile = $('foto')?.files?.[0] || null;
 
     if (!titulo || !custo) {
       alert('Informe título e custo.');
       return;
     }
 
-    const r = await apiFetch(`/empresas/${empresaId}/beneficios`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ titulo, descricao, custo })
-    });
+    let r;
+
+    if (fotoFile) {
+      // Com foto → usa endpoint multipart
+      const fd = new FormData();
+      fd.append('titulo', titulo);
+      fd.append('descricao', descricao);
+      fd.append('custo', String(custo));
+      fd.append('foto', fotoFile);
+
+      r = await apiFetch(`/empresas/${empresaId}/beneficios/upload`, {
+        method: 'POST',
+        body: fd
+      });
+    } else {
+      // Sem foto → usa endpoint JSON antigo (continua funcionando)
+      r = await apiFetch(`/empresas/${empresaId}/beneficios`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, descricao, custo })
+      });
+    }
 
     const txt = await r.text().catch(() => '');
     if (!r.ok) throw new Error(`Falha ao criar benefício (${r.status}): ${txt}`);
@@ -125,6 +181,8 @@ async function criarBeneficio() {
     $('titulo').value = '';
     $('descricao').value = '';
     $('custo').value = '';
+    if ($('foto')) $('foto').value = '';
+
     await listarBeneficios();
     alert('Benefício criado com sucesso!');
   } catch (e) {
@@ -133,7 +191,7 @@ async function criarBeneficio() {
   }
 }
 
-// ===== ENVIAR MOEDAS PARA PROFESSOR =====
+/* ========== ENVIAR MOEDAS ========== */
 function parseIntSafe(id) {
   const v = ($(id)?.value ?? '').trim();
   const n = parseInt(v, 10);
@@ -143,7 +201,6 @@ function parseIntSafe(id) {
 async function enviarMoedas(e) {
   e?.preventDefault?.();
 
-  // IDs que existem no HTML:
   const professorId = parseIntSafe('professorId');
   const amount      = parseIntSafe('quantidade');
   const reason      = ($('motivo')?.value || '').trim();
@@ -172,7 +229,7 @@ async function enviarMoedas(e) {
   }
 }
 
-// ===== BOTÕES =====
+/* ========== BIND BOTÕES / INICIALIZAÇÃO ========== */
 $('criar').onclick = criarBeneficio;
 $('enviar').addEventListener('click', enviarMoedas);
 $('sair').onclick = () => {
@@ -180,7 +237,6 @@ $('sair').onclick = () => {
   location.href = 'login.html';
 };
 
-// ===== INICIALIZAÇÃO =====
 carregarSaldo().catch(console.warn);
 carregarHistorico().catch(console.warn);
 listarBeneficios().catch(console.warn);
