@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 import com.example.moeda.moedaestudantil.dto.AuthDtos.*;
+import com.example.moeda.moedaestudantil.dto.ResetPasswordRequest;
 import com.example.moeda.moedaestudantil.service.AuthService;
 import com.example.moeda.moedaestudantil.service.MailService;
+import com.example.moeda.moedaestudantil.service.EmailService;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Objects;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,10 +21,14 @@ public class AuthController {
 
   private final AuthService service;
   private final MailService mail;
+  private final EmailService emailService;
 
-  public AuthController(AuthService service, MailService mail) {
+  public AuthController(AuthService service,
+                        MailService mail,
+                        EmailService emailService) {
     this.service = service;
     this.mail = mail;
+    this.emailService = emailService;
   }
 
   private static String readStringByMethods(Object src, String... candidates) {
@@ -55,8 +61,7 @@ public class AuthController {
 
   private static String readStringSmart(Object src, String base) {
     if (src == null) return null;
-    String val =
-        readStringByMethods(src, "get" + capitalize(base), base) ;
+    String val = readStringByMethods(src, "get" + capitalize(base), base);
     if (val == null) val = readStringByFields(src, base);
     return val;
   }
@@ -136,5 +141,54 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest dto) {
     return ResponseEntity.ok(service.login(dto));
+  }
+
+    // ==================================================
+  // NOVO: redefinição de senha + envio de e-mail
+  // ==================================================
+  @PostMapping("/reset-password")
+  public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest dto) {
+    // 1) Atualiza a senha no banco
+    service.resetPassword(dto);
+
+    // 2) Monta dados para envio do e-mail
+    String email = dto.getEmail();
+    String novaSenha = dto.getNovaSenha();
+    String role = dto.getRole() != null ? dto.getRole().toUpperCase() : "";
+    String roleLabel = switch (role) {
+      case "ALUNO" -> "Aluno";
+      case "PROFESSOR" -> "Professor";
+      case "EMPRESA" -> "Empresa Parceira";
+      default -> "usuário";
+    };
+
+    System.out.println("[RESET] Enviando e-mail de reset para: " + email +
+        " | tipo_usuario=" + roleLabel +
+        " | nova_senha=" + novaSenha);
+
+    // 3) Tenta enviar via EmailJS (pode continuar dando 404, mas não quebra nada)
+    emailService.sendPasswordResetEmail(email, roleLabel, novaSenha);
+    System.out.println("[RESET] Após chamada do EmailService.sendPasswordResetEmail");
+
+    // 4) Envia também via MailService (SMTP Gmail) – este é o que GARANTE a entrega
+    try {
+      String subject = "Sua senha foi redefinida – Moedas Escolares";
+      String html = """
+          Olá,<br><br>
+          Sua senha de acesso como <strong>%s</strong> foi redefinida.<br>
+          Nova senha: <strong>%s</strong>.<br><br>
+          Por segurança, recomendamos que você altere esta senha após o primeiro acesso.<br>
+          Se você não solicitou esta alteração, entre em contato com o suporte.<br><br>
+          Equipe Moedas Escolares.
+          """.formatted(roleLabel, novaSenha);
+
+      mail.sendHtml(email, subject, html);
+      System.out.println("[RESET] E-mail de reset enviado via MailService (SMTP).");
+    } catch (Exception ex) {
+      System.err.println("[RESET] Falha ao enviar e-mail de reset via MailService");
+      ex.printStackTrace();
+    }
+
+    return ResponseEntity.ok(Map.of("message", "Senha alterada com sucesso"));
   }
 }

@@ -1,33 +1,38 @@
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\WalletService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\MailService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\LedgerKind.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\EmpresaService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\PublicController.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\AlunoController.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\ProfessorService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\ProfessorController.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Professor.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\UserType.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\EmpresaController.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Benefit.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\config\SecurityConfig.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\PasswordService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\AuthService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\EmpresaParceira.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\AuthController.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\LedgerEntry.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Wallet.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\BenefitDtos.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\EmpresaParceiraRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\ProfessorRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\BenefitRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\BenefitService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Aluno.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\AuthDtos.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\MoedaEstudantilApplication.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\WalletRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\config\DataLoader.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\LedgerRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\AlunoService.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\AlunoRepository.java
-C:\Users\Gustavo\Downloads\Sistema Moedas Estudantil\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\TransferDtos.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\EmpresaController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\config\SecurityConfig.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\WalletRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\EmpresaService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\BenefitDtos.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\EmpresaParceiraRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\AuthService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\BenefitRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\AlunoService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\AlunoController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\config\DataLoader.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\MailService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\BenefitImageController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\WalletService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\LedgerEntry.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\BenefitRedemption.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\PasswordService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Aluno.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\AlunoRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Wallet.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Professor.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\AuthDtos.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\TransferDtos.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\BenefitService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\AuthController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\ProfessorController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\ProfessorRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\Benefit.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\BenefitRedemptionRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\MoedaEstudantilApplication.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\LedgerKind.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\dto\ResetPasswordRequest.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\EmpresaParceira.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\EmailService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\service\ProfessorService.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\api\PublicController.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\repo\LedgerRepository.java
+C:\Users\Gustavo\Videos\Moedas-Escolares\moeda-estudantil-full\backend\moeda-estudantil-backend\src\main\java\com\example\moeda\moedaestudantil\domain\UserType.java

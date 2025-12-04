@@ -1,15 +1,20 @@
 package com.example.moeda.moedaestudantil.api;
 
+import com.example.moeda.moedaestudantil.domain.LedgerKind;
+import com.example.moeda.moedaestudantil.domain.UserType;
+import com.example.moeda.moedaestudantil.dto.BenefitDtos.Create;
+import com.example.moeda.moedaestudantil.dto.TransferDtos.GrantProfessor;
+import com.example.moeda.moedaestudantil.service.BenefitService;
+import com.example.moeda.moedaestudantil.service.EmpresaService;
+import com.example.moeda.moedaestudantil.service.WalletService;
+import com.example.moeda.moedaestudantil.repo.LedgerRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
-import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.moeda.moedaestudantil.dto.BenefitDtos.*;
-import com.example.moeda.moedaestudantil.dto.TransferDtos.*;
-import com.example.moeda.moedaestudantil.domain.*;
-import com.example.moeda.moedaestudantil.service.*;
-import com.example.moeda.moedaestudantil.repo.*;
+import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/empresas")
@@ -38,12 +43,37 @@ public class EmpresaController {
         return ResponseEntity.ok(svc.get(id));
     }
 
+    // POST antigo JSON (sem foto) – continua funcionando
     @PostMapping("/{id}/beneficios")
     public ResponseEntity<?> createBenefit(@PathVariable("id") Long id,
                                            @Valid @RequestBody Create dto) {
-        return ResponseEntity.ok(Map.of("benefitId", benefits.create(id, dto)));
+        Long benefitId = benefits.create(id, dto);
+        return ResponseEntity.ok(Map.of("benefitId", benefitId));
     }
 
+    // NOVO: POST multipart com foto
+    @PostMapping("/{id}/beneficios/upload")
+    public ResponseEntity<?> createBenefitWithImage(
+            @PathVariable("id") Long id,
+            @RequestParam("titulo") String titulo,
+            @RequestParam(value = "descricao", required = false) String descricao,
+            @RequestParam("custo") Integer custo,
+            @RequestParam(value = "foto", required = false) MultipartFile foto
+    ) throws IOException {
+
+        byte[] bytes = null;
+        String contentType = null;
+
+        if (foto != null && !foto.isEmpty()) {
+            bytes = foto.getBytes();
+            contentType = foto.getContentType();
+        }
+
+        Long benefitId = benefits.createWithImage(id, titulo, descricao, custo, bytes, contentType);
+        return ResponseEntity.ok(Map.of("benefitId", benefitId));
+    }
+
+    // Lista benefícios da empresa
     @GetMapping("/{id}/beneficios")
     public ResponseEntity<?> listBenefits(@PathVariable("id") Long id) {
         return ResponseEntity.ok(benefits.listByEmpresa(id));
@@ -58,10 +88,10 @@ public class EmpresaController {
     @GetMapping("/{id}/ledger")
     public ResponseEntity<?> ledger(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
-            ledgerRepo.findByFromTypeAndFromIdOrToTypeAndToIdOrderByTsDesc(
-                UserType.EMPRESA, id,
-                UserType.EMPRESA, id
-            )
+                ledgerRepo.findByFromTypeAndFromIdOrToTypeAndToIdOrderByTsDesc(
+                        UserType.EMPRESA, id,
+                        UserType.EMPRESA, id
+                )
         );
     }
 
@@ -69,10 +99,11 @@ public class EmpresaController {
     public ResponseEntity<?> grant(@PathVariable("id") Long id,
                                    @Valid @RequestBody GrantProfessor dto) {
         wallet.transfer(
-            UserType.EMPRESA, id,
-            UserType.PROFESSOR, dto.professorId,
-            dto.amount, dto.reason,
-            LedgerKind.GRANT
+                UserType.EMPRESA, id,
+                UserType.PROFESSOR, dto.professorId,
+                dto.amount,
+                dto.reason,
+                LedgerKind.GRANT
         );
         return ResponseEntity.ok().build();
     }
