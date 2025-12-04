@@ -136,21 +136,24 @@ mvn spring-boot:run
 Moedas-Escolares/
 │
 ├── backend/
-│   ├── src/main/java/com/example/moeda/moedaestudantil/
-│   │   ├── api/         # Controllers (Auth, Aluno, Professor, Empresa, etc.)
-│   │   ├── service/     # Regras de negócio, envio de e-mails, reset de senha
-│   │   ├── repo/        # Repositórios JPA
-│   │   ├── domain/      # Entidades do sistema
-│   │   ├── security/    # Configurações de segurança
-│   │   └── dto/         # Data Transfer Objects
-│   ├── src/main/resources/
-│   │   └── application.properties
+│   └── src/main/java/com/example/moeda/moedaestudantil/
+│       ├── api/        # Controllers (Auth, Aluno, Professor, Empresa, etc)
+│       ├── service/    # Regras de negócio, envio de e-mails, reset de senha
+│       ├── repo/       # Repositórios JPA
+│       ├── domain/     # Entidades do sistema
+│       ├── security/   # Configurações de segurança
+│       └── dto/        # Data Transfer Objects
+│
+│   └── src/main/resources/
+│       └── application.properties
+│
 │   └── pom.xml
 │
 ├── frontend/
 │   ├── assets/
 │   ├── css/
 │   ├── js/
-│   └── *.html           # Telas de login, aluno, professor, empresa, etc.
+│   └── *.html   # Telas de login, aluno, professor, empresa, etc.
 │
 └── README.md
+
