@@ -50,7 +50,7 @@
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
-    <!-- Mail (PRECISA estar dentro de <dependencies>) -->
+    <!-- Mail -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-mail</artifactId>
@@ -94,11 +94,19 @@
         </configuration>
       </plugin>
 
-      <!-- Plugin do Spring Boot 3.3.4 -->
+      <!-- Plugin do Spring Boot: gera JAR executável -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <!-- liga o repackage na fase "package" -->
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
